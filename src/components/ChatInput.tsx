@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { GoPlus } from "react-icons/go";
-import { WiStars } from "react-icons/wi"; 
+import { WiStars } from "react-icons/wi";
 
 interface ChatInputProps {
   onSend: (message: string, files?: File[]) => void;
@@ -23,7 +23,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
       const scrollHeight = textareaRef.current.scrollHeight;
-      const maxHeight = 200;
+      const maxHeight = 120;
       textareaRef.current.style.height =
         Math.min(scrollHeight, maxHeight) + "px";
     }
@@ -117,7 +117,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
             placeholder="Ask template.net"
             rows={3}
             id="chat-input"
-            className={`w-full p-1 rounded-xl focus:outline-none font-medium text-base transition resize-none overflow-y-auto box-border ${
+            className={`w-full p-1 rounded-xl focus:outline-none font-medium text-base overflow-y-auto box-border scrollbar-thin resize-none ${
               isDarkMode
                 ? "bg-gray-700 text-white placeholder-gray-500"
                 : "bg-white text-gray-900 placeholder-gray-400"
@@ -136,7 +136,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
               }`}
               title="Add file"
             >
-                <GoPlus />
+              <GoPlus />
             </button>
 
             {/* Confirm Button */}
@@ -150,7 +150,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
               }`}
               title="Confirm"
             >
-              <WiStars className="text-2xl"/> Generate Free
+              <WiStars className="text-2xl" /> Generate Free
             </button>
           </div>
         </div>

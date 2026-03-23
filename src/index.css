@@ -21,3 +21,18 @@
     height: 100%;
   }
 }
+
+/* Thin scrollbar style for reusable use */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: rgba(107, 114, 128, 0.5);
+  border-radius: 3px;
+}
