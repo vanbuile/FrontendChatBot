@@ -45,3 +45,142 @@
   background-color: rgba(107, 114, 128, 0.5);
   border-radius: 3px;
 }
+
+.bot-md-p + .bot-md-p {
+  margin-top: 0.7rem;
+}
+
+.bot-md-h1,
+.bot-md-h2,
+.bot-md-h3 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-top: 1rem;
+  margin-bottom: 0.45rem;
+}
+
+.bot-md-h1 {
+  font-size: 1.22rem;
+  line-height: 1.45;
+}
+
+.bot-md-h2 {
+  font-size: 1.08rem;
+  line-height: 1.45;
+}
+
+.bot-md-h3 {
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.bot-md-ul,
+.bot-md-ol {
+  margin-top: 0.55rem;
+  margin-bottom: 0.55rem;
+  padding-left: 1.25rem;
+  color: #1e293b;
+}
+
+.bot-md-ul {
+  list-style-type: disc;
+}
+
+.bot-md-ol {
+  list-style-type: decimal;
+}
+
+.bot-md-li + .bot-md-li {
+  margin-top: 0.2rem;
+}
+
+.bot-md-quote {
+  margin-top: 0.85rem;
+  margin-bottom: 0.85rem;
+  border-left: 3px solid #cbd5e1;
+  background: linear-gradient(90deg, rgba(241, 245, 249, 0.8), transparent);
+  color: #334155;
+  padding: 0.5rem 0.85rem;
+  border-radius: 0 0.55rem 0.55rem 0;
+}
+
+.bot-md-inline-code {
+  display: inline-block;
+  background-color: #f1f5f9;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  font-size: 0.84em;
+  line-height: 1.45;
+  padding: 0.08rem 0.38rem;
+  font-family: "Consolas", "SFMono-Regular", "Menlo", monospace;
+}
+
+.bot-md-pre {
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  padding: 0.8rem 0.9rem;
+  overflow-x: auto;
+}
+
+.bot-md-code {
+  color: #0f172a;
+  font-family: "Consolas", "SFMono-Regular", "Menlo", monospace;
+  font-size: 0.84rem;
+  line-height: 1.65;
+}
+
+.bot-md-table-wrap {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  overflow-x: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+}
+
+.bot-md-table {
+  width: 100%;
+  min-width: 420px;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.bot-md-th,
+.bot-md-td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.58rem 0.72rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.bot-md-th {
+  background-color: #f8fafc;
+  color: #334155;
+  font-weight: 700;
+}
+
+.bot-md-table tr:last-child td {
+  border-bottom: none;
+}
+
+.bot-md-link {
+  color: #0f4ccf;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
+}
+
+.bot-md-link:hover {
+  color: #1d4ed8;
+}
+
+.bot-md-hr {
+  margin-top: 0.95rem;
+  margin-bottom: 0.95rem;
+  border: none;
+  height: 1px;
+  background-color: #e2e8f0;
+}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { FiCopy, FiThumbsUp, FiThumbsDown } from "react-icons/fi";
+import remarkGfm from "remark-gfm";
 import type { Message } from "../types/chat";
 
 interface MessageBubbleProps {
@@ -134,11 +135,13 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
       >
         {/* Chatbot Name Header with Action Card */}
         {!isUser && (
-          <div className="mb-2 relative inline-block">
-            <div className="text-sm font-bold text-gray-700">Template.net</div>
+          <div className="mb-2.5 relative inline-block px-4 pt-3">
+            <div className="text-[13px] font-semibold tracking-tight text-slate-600">
+              Template.net
+            </div>
 
             {isHovered && (
-              <div className="absolute left-24 bottom-0 flex gap-1 bg-white border border-gray-200 rounded-full shadow-md p-1 animate-in fade-in duration-200 whitespace-nowrap">
+              <div className="absolute left-24 bottom-0 flex gap-1 bg-white border border-slate-200 rounded-full shadow-md p-1 animate-in fade-in duration-200 whitespace-nowrap">
                 {/* Copy Button */}
                 <button
                   onClick={handleCopy}
@@ -214,14 +217,81 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
         )}
 
         <div
-          className={`break-words prose prose-sm prose-slate max-w-none text-[15px] leading-7 prose-p:my-2 prose-li:my-1 ${
+          className={`break-words max-w-none text-[15px] leading-7 px-4 pb-4 ${
             isUser ? "text-right" : "text-left"
           }`}
         >
           {isUser ? (
             <p>{message.content}</p>
           ) : (
-            <ReactMarkdown>{message.content}</ReactMarkdown>
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                p: ({ children }) => (
+                  <p className="bot-md-p text-slate-800 leading-7">
+                    {children}
+                  </p>
+                ),
+                h1: ({ children }) => (
+                  <h1 className="bot-md-h1 text-slate-900">{children}</h1>
+                ),
+                h2: ({ children }) => (
+                  <h2 className="bot-md-h2 text-slate-900">{children}</h2>
+                ),
+                h3: ({ children }) => (
+                  <h3 className="bot-md-h3 text-slate-900">{children}</h3>
+                ),
+                ul: ({ children }) => <ul className="bot-md-ul">{children}</ul>,
+                ol: ({ children }) => <ol className="bot-md-ol">{children}</ol>,
+                li: ({ children }) => <li className="bot-md-li">{children}</li>,
+                blockquote: ({ children }) => (
+                  <blockquote className="bot-md-quote">{children}</blockquote>
+                ),
+                code: ({ className, children, ...props }) => {
+                  const isInline = !className?.includes("language-");
+
+                  if (isInline) {
+                    return (
+                      <code className="bot-md-inline-code" {...props}>
+                        {children}
+                      </code>
+                    );
+                  }
+
+                  return (
+                    <code
+                      className={`bot-md-code ${className ?? ""}`}
+                      {...props}
+                    >
+                      {children}
+                    </code>
+                  );
+                },
+                pre: ({ children }) => (
+                  <pre className="bot-md-pre">{children}</pre>
+                ),
+                table: ({ children }) => (
+                  <div className="bot-md-table-wrap">
+                    <table className="bot-md-table">{children}</table>
+                  </div>
+                ),
+                th: ({ children }) => <th className="bot-md-th">{children}</th>,
+                td: ({ children }) => <td className="bot-md-td">{children}</td>,
+                a: ({ href, children }) => (
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="bot-md-link"
+                  >
+                    {children}
+                  </a>
+                ),
+                hr: () => <hr className="bot-md-hr" />,
+              }}
+            >
+              {message.content}
+            </ReactMarkdown>
           )}
         </div>
       </div>
