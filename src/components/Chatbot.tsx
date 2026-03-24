@@ -6,7 +6,15 @@ import { Layout } from "./Layout";
 import { MessagesContainer } from "./MessagesContainer";
 
 export const Chatbot: React.FC = () => {
-  const { messages, isLoading, isLoadingHistory, addMessage } = useChat();
+  const {
+    messages,
+    isLoading,
+    isLoadingHistory,
+    isLoadingOlderMessages,
+    hasMoreHistory,
+    addMessage,
+    loadOlderMessages,
+  } = useChat();
 
   const handleSend = (message: string, files?: File[]) => {
     addMessage("user", message, files);
@@ -22,6 +30,9 @@ export const Chatbot: React.FC = () => {
         messages={messages}
         isLoading={isLoading}
         isLoadingHistory={isLoadingHistory}
+        hasMoreHistory={hasMoreHistory}
+        isLoadingOlderMessages={isLoadingOlderMessages}
+        onLoadOlderMessages={loadOlderMessages}
       />
 
       {/* Input Area */}

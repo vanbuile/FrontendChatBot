@@ -121,6 +121,23 @@ const pickAttachments = (source: Record<string, unknown>, keys: string[]): Messa
   return [];
 };
 
+const toBoolean = (value: unknown): boolean | undefined => {
+  if (typeof value === 'boolean') {
+    return value;
+  }
+
+  if (typeof value === 'string') {
+    if (value.toLowerCase() === 'true') {
+      return true;
+    }
+    if (value.toLowerCase() === 'false') {
+      return false;
+    }
+  }
+
+  return undefined;
+};
+
 
 /**
  * Send a message to the chatbot API
@@ -228,6 +245,7 @@ export const getChatHistory = async (params?: {
   sessionId?: string;
   page?: number;
   limit?: number;
+  before?: string;
 }) => {
   try {
     const searchParams = new URLSearchParams();
@@ -240,6 +258,9 @@ export const getChatHistory = async (params?: {
     }
     if (typeof params?.limit === 'number') {
       searchParams.set('limit', String(params.limit));
+    }
+    if (params?.before) {
+      searchParams.set('before', params.before);
     }
 
     const query = searchParams.toString();
@@ -259,8 +280,12 @@ export const getChatHistory = async (params?: {
 
     const data = (await response.json()) as {
       messages?: Array<Record<string, unknown>>;
+      hasMore?: boolean | string;
+      nextBefore?: string;
       data?: {
         messages?: Array<Record<string, unknown>>;
+        hasMore?: boolean | string;
+        nextBefore?: string;
       };
     };
 
@@ -313,10 +338,21 @@ export const getChatHistory = async (params?: {
       }
     });
 
-    return { messages: normalizedMessages };
+    normalizedMessages.sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime());
+
+    return {
+      messages: normalizedMessages,
+      hasMore: toBoolean(data.data?.hasMore ?? data.hasMore) ?? false,
+      nextBefore: toNonEmptyString(data.data?.nextBefore ?? data.nextBefore) ?? null,
+    };
   } catch (error) {
     console.error('Failed to fetch history:', error);
-    return { messages: [], error: error instanceof Error ? error.message : 'Unknown error' };
+    return {
+      messages: [],
+      hasMore: false,
+      nextBefore: null,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    };
   }
 };
 
