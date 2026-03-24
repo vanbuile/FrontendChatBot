@@ -1,73 +1,131 @@
-# React + TypeScript + Vite
+# BLVChat - AI Chatbot Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Giao diện frontend cho BLVChat, một ứng dụng chatbot AI hiện đại được xây dựng với React, TypeScript, Tailwind CSS và Vite.
 
-Currently, two official plugins are available:
+## 🔗 Links Quan Trọng
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Backend Repository**: [Link đến Backend Repo](https://github.com/vanbuile/BackendChatBot)
+- **Production**: [https://frontend-chat-bot-phi.vercel.app/](https://frontend-chat-bot-phi.vercel.app/)
 
-## React Compiler
+## 📋 Yêu Cầu Hệ Thống
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Node.js phiên bản 16.0.0 hoặc cao hơn
+- npm hoặc yarn
+- Git
 
-## Expanding the ESLint configuration
+## 🚀 Cách Setup
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 1. Clone Repository
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone <repository-url>
+cd FrontendChatBot
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Cài Đặt Dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+# hoặc
+yarn install
 ```
+
+### 3. Cấu Hình Environment Variables
+
+Tạo file `.env` tại thư mục gốc project (sao chép từ `.env.example`):
+
+```bash
+cp .env.example .env
+```
+
+Chỉnh sửa file `.env` với cấu hình của bạn:
+
+```
+# API Configuration
+VITE_API_URL=http://localhost:5000/api
+```
+
+### 4. Chạy Development Server
+
+```bash
+npm run dev
+# hoặc
+yarn dev
+```
+
+Mở trình duyệt và truy cập: `http://localhost:5173`
+
+## 📦 Build cho Production
+
+```bash
+npm run build
+# hoặc
+yarn build
+```
+
+Output sẽ được tạo trong thư mục `dist/`.
+
+## 🧪 Preview Production Build
+
+```bash
+npm run preview
+# hoặc
+yarn preview
+```
+
+## 📁 Cấu Trúc Dự Án
+
+```
+src/
+├── components/          # React components
+│   ├── Chatbot.tsx
+│   ├── ChatInput.tsx
+│   ├── Header.tsx
+│   ├── Layout.tsx
+│   ├── MessageBubble.tsx
+│   ├── MessagesContainer.tsx
+│   └── Sidebar.tsx
+├── hooks/              # Custom React hooks
+│   └── useChat.ts
+├── services/           # API services
+│   └── api.ts
+├── types/              # TypeScript types
+│   └── chat.ts
+├── App.tsx
+├── main.tsx
+└── index.css
+```
+
+## 🎨 Công Nghệ Sử Dụng
+
+- **React 18** - UI library
+- **TypeScript** - Static typing
+- **Vite** - Build tool
+- **Tailwind CSS** - Styling
+- **Axios** - HTTP client
+- **React Icons** - Icon library
+- **React Markdown** - Markdown rendering
+
+## 🔧 Các Lệnh Khác
+
+- `npm run lint` - Chạy ESLint
+- `npm run preview` - Preview production build
+
+## 📝 Ghi Chú
+
+- Đảm bảo backend server đang chạy trên `http://localhost:5000` hoặc cập nhật `VITE_API_URL` trong `.env`
+- Ứng dụng hỗ trợ responsive design cho tất cả thiết bị
+- Chat history được tải từ backend khi ứng dụng khởi động
+
+## 🤝 Hỗ Trợ
+
+Nếu gặp vấn đề, vui lòng:
+
+1. Kiểm tra backend đang chạy
+2. Kiểm tra `.env` configuration
+3. Mở console browser để xem error messages
+4. Liên hệ team development
+
+## 📄 License
+
+MIT
