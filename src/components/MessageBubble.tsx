@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
+import { FiCopy, FiThumbsUp, FiThumbsDown } from "react-icons/fi";
 import type { Message } from "../types/chat";
 
 interface MessageBubbleProps {
@@ -62,6 +63,11 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
   const [attachmentPreviews, setAttachmentPreviews] = useState<
     AttachmentPreview[]
   >([]);
+  const [isHovered, setIsHovered] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [likeState, setLikeState] = useState<"none" | "like" | "dislike">(
+    "none",
+  );
 
   useEffect(() => {
     const attachments = message.attachments ?? [];
@@ -101,9 +107,83 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
     };
   }, [message.attachments]);
 
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(message.content);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      console.error("Failed to copy message");
+    }
+  };
+
+  const handleLike = () => {
+    setLikeState(likeState === "like" ? "none" : "like");
+  };
+
+  const handleDislike = () => {
+    setLikeState(likeState === "dislike" ? "none" : "dislike");
+  };
+
   return (
     <div className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
-      <div className="w-4/5 px-1 py-1 text-gray-900 my-5">
+      <div
+        className="w-4/5 px-1 py-1 text-gray-900 my-5 relative"
+        onMouseEnter={() => !isUser && setIsHovered(true)}
+        onMouseLeave={() => !isUser && setIsHovered(false)}
+      >
+        {/* Chatbot Name Header with Action Card */}
+        {!isUser && (
+          <div className="mb-2 relative inline-block">
+            <div className="text-sm font-bold text-gray-700">Template.net</div>
+
+            {isHovered && (
+              <div className="absolute left-24 bottom-0 flex gap-1 bg-white border border-gray-200 rounded-full shadow-md p-1 animate-in fade-in duration-200 whitespace-nowrap">
+                {/* Copy Button */}
+                <button
+                  onClick={handleCopy}
+                  title={copied ? "Copied!" : "Copy"}
+                  className="p-2 rounded-full hover:bg-gray-100 transition text-gray-900 cursor-pointer relative"
+                >
+                  <FiCopy size={16} />
+
+                  {/* Copy Toast Notification */}
+                  {copied && (
+                    <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded whitespace-nowrap animate-in fade-in duration-200">
+                      Đã copy!
+                    </div>
+                  )}
+                </button>
+
+                {/* Like Button */}
+                <button
+                  onClick={handleLike}
+                  title="Like"
+                  className={`p-2 rounded-full transition cursor-pointer ${
+                    likeState === "like"
+                      ? "bg-blue-100 text-blue-600"
+                      : "text-gray-900 hover:bg-gray-100"
+                  }`}
+                >
+                  <FiThumbsUp size={16} />
+                </button>
+
+                {/* Dislike Button */}
+                <button
+                  onClick={handleDislike}
+                  title="Dislike"
+                  className={`p-2 rounded-full transition cursor-pointer ${
+                    likeState === "dislike"
+                      ? "bg-red-100 text-red-600"
+                      : "text-gray-900 hover:bg-gray-100"
+                  }`}
+                >
+                  <FiThumbsDown size={16} />
+                </button>
+              </div>
+            )}
+          </div>
+        )}
         {isUser && attachmentPreviews.length > 0 && (
           <div className="mb-2.5 flex flex-wrap justify-end gap-2">
             {attachmentPreviews.map((item) => (
@@ -134,7 +214,7 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
         )}
 
         <div
-          className={`text-lg break-words prose prose-sm max-w-none ${
+          className={`break-words prose prose-sm prose-slate max-w-none text-[15px] leading-7 prose-p:my-2 prose-li:my-1 ${
             isUser ? "text-right" : "text-left"
           }`}
         >

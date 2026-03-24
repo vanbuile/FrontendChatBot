@@ -91,9 +91,9 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSend, isLoading }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center px-[200px] py-4 bg-white">
+    <div className="flex flex-col items-center justify-center px-6 sm:px-12 lg:px-24 xl:px-32 py-4 bg-transparent">
       {/* Floating Card Container */}
-      <div className="w-full rounded-2xl shadow-xl border transition-all bg-white border-gray-200 shadow-lg">
+      <div className="w-full rounded-2xl border transition-all bg-white border-gray-200">
         {/* Attached Files Preview */}
         {attachedFiles.length > 0 && (
           <div className="border-b px-6 py-4 border-gray-100">
@@ -121,12 +121,12 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSend, isLoading }) => {
                     />
                   ) : (
                     <div className="w-full h-full p-2 flex flex-col items-center justify-center gap-1">
-                      <div className="text-[10px] px-1.5 py-0.5 rounded bg-gray-200 text-gray-700">
+                      <div className="text-[10px] leading-4 px-1.5 py-0.5 rounded bg-gray-200 text-gray-700">
                         {item.file.name.split(".").pop()?.toUpperCase() ||
                           "FILE"}
                       </div>
                       <p
-                        className="text-[10px] leading-tight text-center line-clamp-2 break-all text-gray-700"
+                        className="text-[11px] leading-4 text-center line-clamp-2 break-all text-gray-700"
                         title={item.file.name}
                       >
                         {item.file.name}
@@ -159,7 +159,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSend, isLoading }) => {
             placeholder="Ask template.net"
             rows={3}
             id="chat-input"
-            className="w-full p-1 rounded-xl focus:outline-none font-medium text-base overflow-y-auto box-border scrollbar-thin resize-none bg-white text-gray-900 placeholder-gray-400"
+            className="w-full p-1 rounded-xl focus:outline-none font-medium text-[15px] leading-7 overflow-y-auto box-border scrollbar-thin resize-none bg-white text-gray-900 placeholder-gray-400"
           />
 
           {/* Buttons Row - Bottom */}
@@ -177,7 +177,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSend, isLoading }) => {
             <button
               onClick={handleConfirm}
               disabled={isLoading || !input.trim()}
-              className={`flex-shrink-0 px-3 py-1 rounded-full flex items-center justify-center text-md font-medium ${
+              className={`flex-shrink-0 px-3 py-1 rounded-full flex items-center justify-center text-sm sm:text-base leading-6 font-semibold ${
                 isLoading || !input.trim()
                   ? "bg-gray-100 text-gray-400 cursor-not-allowed"
                   : "bg-blue-700 hover:bg-blue-600 text-white cursor-pointer"

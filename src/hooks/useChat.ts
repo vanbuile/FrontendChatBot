@@ -5,6 +5,7 @@ import { getChatHistory, sendChatMessage } from '../services/api';
 export const useChat = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingHistory, setIsLoadingHistory] = useState(true);
 
   useEffect(() => {
     const loadHistory = async () => {
@@ -17,6 +18,8 @@ export const useChat = () => {
         setMessages(history.messages);
       } catch (error) {
         console.error('Error loading chat history:', error);
+      } finally {
+        setIsLoadingHistory(false);
       }
     };
 
@@ -74,5 +77,5 @@ export const useChat = () => {
     setMessages([]);
   }, []);
 
-  return { messages, isLoading, addMessage, clearMessages };
+  return { messages, isLoading, isLoadingHistory, addMessage, clearMessages };
 };

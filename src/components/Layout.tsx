@@ -7,12 +7,12 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="flex h-screen bg-white">
+    <div className="flex h-screen bg-white overflow-hidden">
       {/* Sidebar */}
       <Sidebar />
 
       {/* Main Content */}
-      <div className="flex flex-col flex-1">{children}</div>
+      <div className="flex flex-col flex-1 min-w-0 bg-slate-50">{children}</div>
     </div>
   );
 };

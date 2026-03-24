@@ -49,10 +49,12 @@ export const Sidebar: React.FC<SidebarProps> = () => {
             >
               <item.icon size={20} />
             </div>
-            <span className={`text-xs font-sm  group-hover:text-blue-600 transition ${
+            <span
+              className={`text-[11px] leading-4 font-medium tracking-tight group-hover:text-blue-600 transition ${
                 idx === 0 ? "text-blue-600" : "text-gray-700"
-            }
-            `}>
+              }
+            `}
+            >
               {item.label}
             </span>
           </button>
