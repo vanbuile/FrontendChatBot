@@ -30,7 +30,7 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
               <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce delay-100" />
               <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce delay-200" />
             </div>
-            <p className="text-sm text-gray-500">Loading messages...</p>
+            <p className="text-sm text-gray-500">Loading messages...Waiting a minute to wake up server.</p>
           </div>
         </div>
       ) : messages.length === 0 ? (
