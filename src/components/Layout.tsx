@@ -2,15 +2,14 @@ import React from "react";
 import { Sidebar } from "./Sidebar";
 
 interface LayoutProps {
-  isDarkMode: boolean;
   children: React.ReactNode;
 }
 
-export const Layout: React.FC<LayoutProps> = ({ isDarkMode, children }) => {
+export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className={`flex h-screen ${isDarkMode ? "bg-gray-900" : "bg-white"}`}>
+    <div className="flex h-screen bg-white">
       {/* Sidebar */}
-      <Sidebar isDarkMode={isDarkMode} />
+      <Sidebar />
 
       {/* Main Content */}
       <div className="flex flex-col flex-1">{children}</div>

@@ -1,17 +1,14 @@
-export interface Message {
-  id: string;
-  role: 'user' | 'assistant';
-  content: string;
-  timestamp: Date;
-  attachments?: File[];
-  isLoading?: boolean;
+export interface MessageAttachment {
+  name: string;
+  file?: File;
+  url?: string;
+  mimeType?: string;
+  size?: number;
 }
 
-export interface ChatContextType {
-  messages: Message[];
-  isLoading: boolean;
-  isDarkMode: boolean;
-  addMessage: (role: 'user' | 'assistant', content: string, attachments?: File[]) => void;
-  clearMessages: () => void;
-  toggleDarkMode: () => void;
+export interface Message {
+  content: string;
+  role: 'user' | 'assistant';
+  timestamp: Date;
+  attachments?: MessageAttachment[];
 }

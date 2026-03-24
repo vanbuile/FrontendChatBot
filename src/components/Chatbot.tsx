@@ -5,15 +5,7 @@ import { Header } from "./Header";
 import { Layout } from "./Layout";
 import { MessagesContainer } from "./MessagesContainer";
 
-interface ChatbotProps {
-  isDarkMode: boolean;
-  onToggleDarkMode: () => void;
-}
-
-export const Chatbot: React.FC<ChatbotProps> = ({
-  isDarkMode,
-  onToggleDarkMode,
-}) => {
+export const Chatbot: React.FC = () => {
   const { messages, isLoading, addMessage } = useChat();
 
   const handleSend = (message: string, files?: File[]) => {
@@ -21,23 +13,15 @@ export const Chatbot: React.FC<ChatbotProps> = ({
   };
 
   return (
-    <Layout isDarkMode={isDarkMode}>
+    <Layout>
       {/* Header */}
-      <Header isDarkMode={isDarkMode} onToggleDarkMode={onToggleDarkMode} />
+      <Header />
 
       {/* Messages Container */}
-      <MessagesContainer
-        messages={messages}
-        isLoading={isLoading}
-        isDarkMode={isDarkMode}
-      />
+      <MessagesContainer messages={messages} isLoading={isLoading} />
 
       {/* Input Area */}
-      <ChatInput
-        onSend={handleSend}
-        isLoading={isLoading}
-        isDarkMode={isDarkMode}
-      />
+      <ChatInput onSend={handleSend} isLoading={isLoading} />
     </Layout>
   );
 };
